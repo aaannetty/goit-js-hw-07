@@ -12,7 +12,7 @@ function createGalleryItemsMarkup(items) {
       <a class="gallery__link" href="${original}">
         <img
           class="gallery__image"
-          src="${preview}"
+          src="${original}"
           data-source="${original}"
           alt="Image description"
         />
@@ -25,9 +25,9 @@ function createGalleryItemsMarkup(items) {
 gallery.insertAdjacentHTML('beforeend', createGalleryItemsMarkup(galleryItems));
 
 gallery.addEventListener('click', onGalleryClick);
-
 function onGalleryClick(evt) {
   evt.preventDefault();
+  window.addEventListener('keydown', onEscClick);
   const target = evt.target;
 
   if (target.nodeName !== 'IMG') {
@@ -38,11 +38,11 @@ function onGalleryClick(evt) {
     `<img src="${target.dataset.source}" width="800" height="600"/>`
   );
   instance.show();
-  // const galleryLink = target.closest('.gallery__link');
 
-  // galleryLink.classList.add('is-active');
-
-  // const url = galleryLink.href;
-
-  // console.log(url);
+  function onEscClick(evt) {
+    if (evt.code !== 'Escape') {
+      return;
+    }
+    instance.close();
+  }
 }
