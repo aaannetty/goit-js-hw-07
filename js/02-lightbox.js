@@ -21,30 +21,11 @@ function createGalleryItemsMarkup(items) {
 }
 gallery.insertAdjacentHTML('beforeend', createGalleryItemsMarkup(galleryItems));
 
-gallery.addEventListener('click', onGalleryClick);
-function onGalleryClick(evt) {
-  evt.preventDefault();
-  window.addEventListener('keydown', onEscClick);
-  const target = evt.target;
-
-  if (target.nodeName !== 'IMG') {
-    return;
-  }
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionSelector: '.gallery__image',
-    captionType: 'attr',
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
-  lightbox.open();
-
-  function onEscClick(evt) {
-    if (evt.code !== 'Escape') {
-      return;
-    }
-    lightbox.close();
-  }
-}
+new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionSelector: '.gallery__image',
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});

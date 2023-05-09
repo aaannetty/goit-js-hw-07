@@ -44,5 +44,6 @@ function onGalleryClick(evt) {
       return;
     }
     instance.close();
+    window.removeEventListener('keydown', onEscClick);
   }
 }
